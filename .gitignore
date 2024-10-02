@@ -1,0 +1,5 @@
+etc/download_hf_models/token.txt
+hf_models
+*.pyc
+! etc/download_hf_models
+! etc/llama.cpp

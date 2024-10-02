@@ -1,2 +1,3 @@
 # data_llm
-data_llm
+
+conda env create -f env.yml

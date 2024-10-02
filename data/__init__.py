@@ -1,0 +1,1 @@
+SAMPLE_DATA_PATH = "etc/syspop_base.parquet"
