@@ -5,8 +5,8 @@ from argparse import ArgumentParser, BooleanOptionalAction
 
 
 MODELS = [
-    #"BAAI/bge-small-en-v1.5",
-    #"codellama/CodeLlama-7b-Instruct-hf"
+    "BAAI/bge-small-en-v1.5",
+    "codellama/CodeLlama-7b-Instruct-hf",
     "meta-llama/Llama-3.2-3B-Instruct"
 ]
 
@@ -27,10 +27,10 @@ def download_models(workdir: str):
         )
 
 
-def convert_model(workdir: str, llama_cpp_dir: str="etc/llama.cpp"):
-    script_path = join(llama_cpp_dir, "convert-hf-to-gguf.py")
+def convert_model(workdir: str, llama_cpp_dir: str=getenv("LLAMA_CPP_DIR")):
+    script_path = join(llama_cpp_dir, "convert_hf_to_gguf.py")
     for model_id in MODELS:
-        proc_cmd = f"{script_path} --model {join(workdir, model_id)} --outfile {join(workdir, model_id) + '.gguf'}"
+        proc_cmd = f"{script_path} {join(workdir, model_id)} --outfile {join(workdir, model_id) + '.gguf'}"
         print(proc_cmd)
         system(proc_cmd)
 
@@ -50,7 +50,11 @@ if __name__ == "__main__":
     parser.add_argument("--download_model", action=BooleanOptionalAction)
     parser.add_argument("--convert_model", action=BooleanOptionalAction)
 
-    args = parser.parse_args(["--download_model", "--convert_model"])  
+    args = parser.parse_args(
+        [
+            # "--download_model", 
+            # "--convert_model"
+        ])  
 
     if args.download_model:
         download_models(args.workdir)

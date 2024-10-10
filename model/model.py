@@ -13,7 +13,7 @@ from llama_index.llms.llama_cpp.llama_utils import (
 from matplotlib.pyplot import close as plt_close
 from pandas import DataFrame
 
-from model import CODELLM_PATH, LLM_PATH
+from model import CODELLM_PATH, LLM_PATH, EMBEDDING_PATH
 from llama_index.core import Settings
 
 def create_img(df: DataFrame, pandas_instruction_str: str, verbose: bool = True):
@@ -53,7 +53,7 @@ def load_service(llm_model, embed_model, chunk_size: int = 1024):
     #set_global_service_context(service_context)
 
 
-def load_embedding_model(embedding_model_name: str = "BAAI/bge-small-en-v1.5"):
+def load_embedding_model():
     """The model can be chosen from:
         - "BAAI/bge-large-en-v1.5": "BAAI General Embedding Model (large) v1.5",
         - "BAAI/bge-small-en-v1.5": "BAAI General Embedding Model (small) v1.5",
@@ -64,11 +64,10 @@ def load_embedding_model(embedding_model_name: str = "BAAI/bge-small-en-v1.5"):
     Returns:
         _type_: _description_
     """
-    return HuggingFaceEmbedding(model_name=embedding_model_name)
+    return HuggingFaceEmbedding(model_name=EMBEDDING_PATH)
 
 
 def load_codellama(
-    llm_model_name: str = CODELLM_PATH,
     temperature: float = 0.1,
     max_new_tokens: int = 1024,
     context_window: int = 5000,
@@ -89,7 +88,7 @@ def load_codellama(
     """
 
     return LlamaCPP(
-        model_path=llm_model_name,
+        model_path=CODELLM_PATH,
         temperature=temperature,
         max_new_tokens=max_new_tokens,
         context_window=context_window,
@@ -101,8 +100,8 @@ def load_codellama(
     )
 
 
-def load_llm_model(llm_model_name: str = LLM_PATH, verbose: bool = False):
+def load_llm_model(verbose: bool = False):
     return Llama(
-        model_path=llm_model_name,
+        model_path=LLM_PATH,
         verbose=verbose,
     )
