@@ -1,17 +1,18 @@
 # data_llm
 
+Using Large Language Model (LLM) to provide insights from a database
 
-## Creating the data_llm environment
+##  📖 Creating the data_llm environment
 ```
 conda env create -f env.yml
 ```
 
-## Start the application
+## 💻 Start the application
 ```
 python app.py
 ```
 
-## Building and run docker:
+## 📦 Building and run docker:
 Alternatively, a docker container can be used:
 
 The container can be built using:
@@ -34,9 +35,7 @@ The container can be debugged via:
 docker run -it -v hf_models:/app/hf_models --rm data_llm_app /bin/bash
 ```
 
-
-
-## Choosing a LLM model
+## ✨ Choosing a LLM model
 You can choose using an OpenAI model (by default, `gpt-4o-mini` is used) or a set of local models.
 
 ### Using OpenAI API
