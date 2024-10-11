@@ -63,22 +63,6 @@ def create_app():
             Row(
                 [
                     Col(
-                        [
-                            RadioItems(
-                                id="llm-radio",
-                                options=[
-                                    {"label": "CodeLLM + LLM", "value": "use_llm"},
-                                    {"label": "CodeLLM", "value": "not_use_llm"},
-                                ],
-                                value="not_use_llm",
-                                labelStyle={"display": "inline-block"},
-                                style=DASHBOARD_STYLE["llm-radio"]["style"].update(
-                                    {"display": "none"}
-                                ),
-                            )
-                        ],
-                    ),
-                    Col(
                         id="output-container",
                         width=DASHBOARD_STYLE["output-container"]["width"],
                         style=DASHBOARD_STYLE["output-container"]["style"].update(

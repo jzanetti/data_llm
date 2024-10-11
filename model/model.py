@@ -15,6 +15,9 @@ from pandas import DataFrame
 
 from model import CODELLM_PATH, LLM_PATH, EMBEDDING_PATH
 from llama_index.core import Settings
+from llama_index.llms.openai import OpenAI
+import matplotlib
+matplotlib.use("agg")
 
 def create_img(df: DataFrame, pandas_instruction_str: str, verbose: bool = True):
 
@@ -35,8 +38,8 @@ def create_img(df: DataFrame, pandas_instruction_str: str, verbose: bool = True)
     return f"data:image/png;base64,{image_base64}"
 
 
-def create_dataframe_engine(df: DataFrame, verbose: bool = True):
-    return PandasQueryEngine(df=df, verbose=verbose)
+def create_dataframe_engine(df: DataFrame, verbose: bool = True, llm = OpenAI(model="gpt-4o-mini")):
+    return PandasQueryEngine(df=df, verbose=verbose, llm=llm)
 
 
 def load_service(llm_model, embed_model, chunk_size: int = 1024):
@@ -44,13 +47,6 @@ def load_service(llm_model, embed_model, chunk_size: int = 1024):
     Settings.llm = llm_model
     Settings.embed_model = embed_model
     Settings.chunk_size = chunk_size
-
-    #service_context = ServiceContext.from_defaults(
-    #    llm=llm_model,
-    #    chunk_size=chunk_size,
-    #    embed_model=embed_model,
-    #)
-    #set_global_service_context(service_context)
 
 
 def load_embedding_model():

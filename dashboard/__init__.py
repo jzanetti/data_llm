@@ -134,6 +134,3 @@ DASHBOARD_STYLE = {
     },
 }
 
-DESCRIPTOR = "The ESR Interactive Data Reporting system operates within a secure, isolated framework at the ESR High Performance Computing (HPC) facility. At its core is LLAMA2, an advanced Large Language Model (LLM) developed by Meta, ensuring cutting-edge performance and reliability."
-
-PROMPT_TEMPLATE = "The question is {prompt} The answer as '{response}'. Combine the question and answer and give one definte sentence. Strickly no extra other texts beyond this sentence."

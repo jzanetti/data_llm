@@ -4,6 +4,12 @@ FROM continuumio/miniconda3
 # Set the working directory in the container
 WORKDIR /app
 
+# Install CMake
+RUN apt-get update && \
+    apt-get install -y cmake build-essential && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Copy the environment.yml file into the container
 COPY env.yml .
 
@@ -16,5 +22,10 @@ SHELL ["conda", "run", "-n", "data_llm", "/bin/bash", "-c"]
 # Copy the rest of the application code into the container
 COPY . .
 
-# Ensure the environment is activated when the container starts
-ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "myenv", "python", "app.py"]
+# Set lib variable
+ENV LD_LIBRARY_PATH=/opt/conda/envs/data_llm/lib
+
+# Expose IP:
+EXPOSE 8050
+
+CMD ["conda", "run", "-n", "data_llm", "python", "app.py"]
