@@ -14,7 +14,7 @@
         "editor.showUnused": true
     },
     "python.analysis.extraPaths": [
-        "/home/zhangs/Github/data_llm"
+        "/Users/sijinzhang/Github/data_llm"
     ],
     "python.testing.pytestArgs": [
         "lib"

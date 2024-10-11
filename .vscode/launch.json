@@ -10,9 +10,8 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
-                "PYTHONPATH": "/home/zhangs/Github/data_llm"
+                "PYTHONPATH": "/Users/sijinzhang/Github/data_llm"
             }
         }
     ]
 }
-~
