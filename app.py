@@ -28,8 +28,9 @@ if openai_api_key is None:
     llm_code_model = load_codellama()
     llm_model = load_llm_model()
     load_service(llm_code_model, embed_model)
-
-query_engine = create_dataframe_engine(df)
+    query_engine = create_dataframe_engine(df, llm=None)
+else:
+    query_engine = create_dataframe_engine(df)
 
 app = create_app()
 
