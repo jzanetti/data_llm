@@ -29,9 +29,9 @@ if openai_api_key is None:
     llm_model = load_llm_model()
     load_service(llm_code_model, embed_model)
 else:
-    query_engine = create_dataframe_engine(df)
+    query_engine = create_dataframe_engine(df, model_name="gpt-4o")
 
-app = create_app()
+app = create_app(company_name = "TAWA")
 
 
 @app.callback(
@@ -125,13 +125,16 @@ def render_content(tab):
     ],
     prevent_initial_call=True,
 )
-def update_output(tab, n_clicks, prompt, current_output):
+def update_output(tab, n_clicks, prompt, current_output, instruction_to_remove: list = ["```", "python", "\n"]):
 
     if tab == "tab-data-insight":
         if n_clicks > 0:
             if prompt:
                 response = query_engine.query(prompt)
                 pandas_instruction_str = response.metadata["pandas_instruction_str"]
+
+                for item in  instruction_to_remove:
+                    pandas_instruction_str = pandas_instruction_str.replace(item, "")
 
                 if "plot" in pandas_instruction_str.lower():
                     image_src = create_img(df, pandas_instruction_str)
@@ -154,6 +157,8 @@ def update_output(tab, n_clicks, prompt, current_output):
                     ]
                 else:
                     results = response.response
+                    if "error" in results.lower():
+                        results = eval(pandas_instruction_str)
                     return [
                         html.Div(
                             [

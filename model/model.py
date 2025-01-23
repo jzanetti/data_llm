@@ -19,8 +19,8 @@ from llama_index.llms.openai import OpenAI
 import matplotlib
 matplotlib.use("agg")
 
-def create_img(df: DataFrame, pandas_instruction_str: str, verbose: bool = True):
-
+def create_img(df: DataFrame, pandas_instruction_str: str, 
+               verbose: bool = True):
     if verbose:
         print(pandas_instruction_str)
     fig = eval(pandas_instruction_str)
@@ -38,8 +38,8 @@ def create_img(df: DataFrame, pandas_instruction_str: str, verbose: bool = True)
     return f"data:image/png;base64,{image_base64}"
 
 
-def create_dataframe_engine(df: DataFrame, verbose: bool = True, llm = OpenAI(model="gpt-4o-mini")):
-    return PandasQueryEngine(df=df, verbose=verbose, llm=llm)
+def create_dataframe_engine(df: DataFrame, verbose: bool = True, model_name: str = "gpt-4o-mini"):
+    return PandasQueryEngine(df=df, verbose=verbose, llm=OpenAI(model=model_name))
 
 
 def load_service(llm_model, embed_model, chunk_size: int = 1024):

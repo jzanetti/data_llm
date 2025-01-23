@@ -6,13 +6,13 @@ from dash_html_components import H1, Button, Div
 from dashboard import DASHBOARD_STYLE
 
 
-def create_app():
+def create_app(company_name: str = "ESR"):
     app = Dash(__name__)
 
     app.layout = Container(
         [
             H1(
-                "ESR Interative Data Reporting", style=DASHBOARD_STYLE["title"]["style"]
+                f"{company_name} Interative Data Reporting", style=DASHBOARD_STYLE["title"]["style"]
             ),
             Div(
                 style=DASHBOARD_STYLE["tab-container"]["style"],
